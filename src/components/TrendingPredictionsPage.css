@@ -8,30 +8,34 @@
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    z-index: 9999; /* Ensure the notification is on top of other content */
+    z-index: 9999;
 }
 
-.coin-row {
+.prediction-row {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 10px; /* Adjust the margin between rows */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #26272b;
+    box-shadow: 0px 0px 12px #18191b;
+    border-radius: 8px;
+    margin: 1rem; /* Reduce margin */
+    padding: .5rem; /* Reduce padding */
 }
 
 .coin-container {
-    margin: 25px; /* Adjust the margin around each coin */
+    margin: 10px; /* Reduce margin */
 }
 
 .coin-image {
-    width: 100px; /* Adjust the width of the coin image */
-    height: 100px; /* Adjust the height of the coin image */
+    width: 80px; /* Reduce image width */
+    height: 80px; /* Reduce image height */
 }
 
 h2 {
-    margin-top: 10px; /* Adjust the margin above the coin name */
+    margin-top: 5px; /* Reduce margin */
 }
 
 button {
-    margin-top: 10px; /* Adjust the margin above the predict button */
+    margin-top: 5px; /* Reduce margin */
 }
 
