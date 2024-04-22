@@ -6,11 +6,13 @@ import './components/Navigation.css';
 import Coins from './components/Coins';
 import Navbar from './components/Navbar';
 import TrendingPredictionsPage from './components/TrendingPredictionsPage';
+import PredictionPage from './components/PredictionPage';
 
 function App() {
     const [coins, setCoins] = useState([]);
     const [showCoins, setShowCoins] = useState(false);
     const [showTrendingPredictions, setShowTrendingPredictions] = useState(false);
+    const [showPredictionPage, setShowPredictionPage] = useState(false);
     const [trainingOutput, setTrainingOutput] = useState(null); // New state for training output
 
     const url =
@@ -35,11 +37,18 @@ function App() {
     const handleHomeClick = () => {
         setShowCoins(false);
         setShowTrendingPredictions(false);
+        setShowPredictionPage(false);
     };
 
     const handleTrendingClick = () => {
         setShowCoins(false);
         setShowTrendingPredictions(true);
+    };
+
+    const handlePredictionClick = () => {
+        setShowCoins(false);
+        setShowTrendingPredictions(false);
+        setShowPredictionPage(true);
     };
 
     return (
@@ -48,6 +57,7 @@ function App() {
                 onMarketClick={handleMarketClick}
                 onHomeClick={handleHomeClick}
                 onTrendingClick={handleTrendingClick}
+                onPricePredictionClick={handlePredictionClick}
             />
             {showCoins ? (
                 <>
@@ -56,7 +66,9 @@ function App() {
                 </>
             ) : showTrendingPredictions ? (
                 <TrendingPredictionsPage />
-            ) : (
+            ) : showPredictionPage ? (
+                    <PredictionPage />
+                ) : (
                 <>
                     <Hero />
 
