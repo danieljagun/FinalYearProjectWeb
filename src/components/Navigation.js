@@ -3,7 +3,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import './Navigation.css';
 
 
-const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick }) => {
+const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick, onPricePredictionClick  }) => {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
@@ -27,6 +27,11 @@ const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick }) => {
                     <li>
                         <span onClick={onTrendingClick}>Trending Predictions</span>
                     </li>
+                    <li>
+                        <span onClick={onPricePredictionClick}>Price Prediction</span>
+                    </li>
+
+
                 </ul>
 
                 <div className='hamburger' onClick={handleClick}>
