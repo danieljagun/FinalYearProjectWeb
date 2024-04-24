@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, {useState} from 'react';
+import {FaBars, FaTimes} from 'react-icons/fa';
 import './Navigation.css';
 
 
-const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick, onPricePredictionClick  }) => {
+const Navigation = ({onMarketClick, onHomeClick, onTrendingClick, onPricePredictionClick, onPredictionsChartClick}) => {
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
@@ -13,9 +13,7 @@ const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick, onPricePredic
             <div className='container'>
                 <h1>
                     <span onClick={onHomeClick}>Senti</span>
-                    <span className='primary' onClick={onHomeClick}>
-            Trader
-          </span>
+                    <span className='primary' onClick={onHomeClick}>Trader</span>
                 </h1>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li>
@@ -30,15 +28,16 @@ const Navigation = ({ onMarketClick, onHomeClick, onTrendingClick, onPricePredic
                     <li>
                         <span onClick={onPricePredictionClick}>Price Prediction</span>
                     </li>
-
-
+                    <li>
+                        <span onClick={onPredictionsChartClick}>Predictions Charts</span>
+                    </li>
                 </ul>
 
                 <div className='hamburger' onClick={handleClick}>
                     {click ? (
-                        <FaTimes size={20} style={{ color: '#333' }} />
+                        <FaTimes size={20} style={{color: '#333'}}/>
                     ) : (
-                        <FaBars size={20} style={{ color: '#333' }} />
+                        <FaBars size={20} style={{color: '#333'}}/>
                     )}
                 </div>
             </div>

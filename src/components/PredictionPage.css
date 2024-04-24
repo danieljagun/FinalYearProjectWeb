@@ -1,0 +1,78 @@
+/* PredictionPage.css */
+
+.prediction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.prediction-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Provides space between items */
+}
+
+.prediction-coin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 250px; /* Set a fixed width for uniformity */
+    transition: transform 0.3s ease;
+    color: #000;
+}
+
+.prediction-coin-container:hover {
+    transform: translateY(-5px);
+}
+
+.prediction-coin-image {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px; /* Adds space below the image */
+}
+
+.prediction-coin-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prediction-coin-button:hover {
+    background-color: #0056b3;
+}
+
+.prediction-coin-prediction-output {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #000;
+    font-size: 1rem;
+}
+
+.prediction-floating-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff6347;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}

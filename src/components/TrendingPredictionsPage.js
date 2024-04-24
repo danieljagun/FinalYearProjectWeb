@@ -22,6 +22,7 @@ const TrendingPredictionsPage = () => {
     const handlePredictClick = (coin) => {
         axios.post('http://127.0.0.1:5000/predict', { coin_name: coin.toLowerCase() })
             .then((response) => {
+                console.log(response.data)
                 setTrainingOutput(response.data);
                 setError(null);
             })
@@ -35,6 +36,17 @@ const TrendingPredictionsPage = () => {
     const coins = ['bitcoin', 'ethereum', 'solana', 'dogecoin', 'cardano'];
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
+    const renderOutput = () => {
+        if (typeof trainingOutput.output === 'string') {
+            return trainingOutput.output.split('\n').filter(line => line.trim() !== "==================================================").map((line, index) => (
+                <p key={index}>{line}</p>
+            ));
+        } else {
+            return <p>Unexpected data format</p>;
+        }
+    };
+
 
     return (
         <div className="trending-container">
@@ -51,9 +63,7 @@ const TrendingPredictionsPage = () => {
             {trainingOutput && (
                 <div className="trending-prediction-output">
                     <h2>Prediction Output:</h2>
-                    {trainingOutput.output.split('\n').filter(line => line.trim() !== "==================================================").map((line, index) => (
-                        <p key={index}>{line}</p>
-                    ))}
+                    {renderOutput()}
                 </div>
             )}
             {error && <div className="trending-floating-notification">{error}</div>}
