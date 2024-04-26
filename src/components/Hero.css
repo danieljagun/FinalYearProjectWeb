@@ -1,4 +1,13 @@
+.hero {
+    /* Ensure the hero section does not exceed the viewport width */
+    overflow-x: hidden;
+}
+
+
 .hero .container {
+    /* Prevent horizontal scrolling within the container */
+    overflow-x: hidden;
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin: 4rem auto;

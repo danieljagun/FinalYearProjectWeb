@@ -1,12 +1,22 @@
-import React, {useState} from 'react';
-import {FaBars, FaTimes} from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import './Navigation.css';
 
-
-const Navigation = ({onMarketClick, onHomeClick, onTrendingClick, onPricePredictionClick, onPredictionsChartClick}) => {
+const Navigation = ({
+                        onMarketClick,
+                        onHomeClick,
+                        onTrendingClick,
+                        onPricePredictionClick,
+                        onPredictionsChartClick,
+                        onNewsSentimentClick
+                    }) => {
     const [click, setClick] = useState(false);
 
-    const handleClick = () => setClick(!click);
+    const handleClick = () => {
+        if (click) {
+            setClick(false);
+        }
+    };
 
     return (
         <div className='header'>
@@ -17,27 +27,48 @@ const Navigation = ({onMarketClick, onHomeClick, onTrendingClick, onPricePredict
                 </h1>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li>
-                        <span onClick={onHomeClick}>Home</span>
+            <span onClick={() => {
+                handleClick();
+                onHomeClick();
+            }}>Home</span>
                     </li>
                     <li>
-                        <span onClick={onMarketClick}>Market</span>
+            <span onClick={() => {
+                handleClick();
+                onMarketClick();
+            }}>Market</span>
                     </li>
                     <li>
-                        <span onClick={onTrendingClick}>Trending Predictions</span>
+            <span onClick={() => {
+                handleClick();
+                onTrendingClick();
+            }}>Trending Predictions</span>
                     </li>
                     <li>
-                        <span onClick={onPricePredictionClick}>Price Prediction</span>
+            <span onClick={() => {
+                handleClick();
+                onPricePredictionClick();
+            }}>Price Prediction</span>
                     </li>
                     <li>
-                        <span onClick={onPredictionsChartClick}>Predictions Charts</span>
+            <span onClick={() => {
+                handleClick();
+                onPredictionsChartClick();
+            }}>Predictions Charts</span>
+                    </li>
+                    <li>
+            <span onClick={() => {
+                handleClick();
+                onNewsSentimentClick();
+            }}>News</span>
                     </li>
                 </ul>
 
-                <div className='hamburger' onClick={handleClick}>
+                <div className='hamburger' onClick={() => setClick(!click)}>
                     {click ? (
-                        <FaTimes size={20} style={{color: '#333'}}/>
+                        <FaTimes size={20} style={{ color: '#333' }} />
                     ) : (
-                        <FaBars size={20} style={{color: '#333'}}/>
+                        <FaBars size={20} style={{ color: '#333' }} />
                     )}
                 </div>
             </div>

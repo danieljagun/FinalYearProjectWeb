@@ -33,6 +33,7 @@ const PredictionPage = () => {
             .catch((error) => {
                 console.error('Error fetching prediction:', error);
                 setError('Failed to connect to the prediction server. Please ensure the Flask app is running.');
+                setTimeout(() => setError(null), 5000);
             });
     };
 
@@ -49,9 +50,9 @@ const PredictionPage = () => {
 
     const formatPrice = (coin, price) => {
         if (coin === 'Dogecoin' || coin === 'Cardano') {
-            return price.toFixed(4);
+            return price.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
         } else {
-            return price.toFixed(2);
+            return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
     };
 

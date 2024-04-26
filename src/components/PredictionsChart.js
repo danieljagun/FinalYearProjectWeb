@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area, Brush } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, AreaChart, Area, Brush, ResponsiveContainer}
+    from 'recharts';
 import './PredictionsChart.css';
 
 const PredictionsChart = () => {
@@ -23,10 +24,11 @@ const PredictionsChart = () => {
                             .map(prediction => ({
                                 ...prediction,
                                 timestamp: new Date(prediction.timestamp).toLocaleDateString(),
-                                difference: Math.abs(prediction.predicted_price - prediction.actual_price),
+                                difference: prediction.predicted_price - prediction.actual_price, // Removed Math.abs to keep the sign
+                                formattedDifference: `${prediction.predicted_price - prediction.actual_price > 0 ? '+' : ''}${(prediction.predicted_price - prediction.actual_price).toFixed(2)}`, // Formatting with sign
                                 percentageDifference: ((prediction.actual_price - prediction.predicted_price) / prediction.actual_price) * 100,
                                 isCorrect: prediction.predicted_movement === (prediction.actual_price > prediction.predicted_price ? 'Up' : 'Down') ? 'Correct' : 'Incorrect'
-                            }));
+                            }))
 
                         setPredictions(filteredData);
                     } else {
@@ -58,46 +60,51 @@ const PredictionsChart = () => {
             <input type="date" onChange={(e) => setEndDate(new Date(e.target.value).getTime())} />
             {selectedCoin && predictions.length > 0 && (
                 <div className="chart-container">
-                    <h3 className="chart-title">Price Percentage Comparison Chart</h3>
+                    <h2 className="chart-title">Price Percentage Comparison Chart</h2>
+                    <p className="chart-description">
+                        This chart compares predicted and actual prices over time, illustrating how closely our predictions match market outcomes.
+                    </p>
+                    <ResponsiveContainer width="100%" height={300}>
                     <LineChart
-                        width={700}
-                        height={300}
-                        data={predictions}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
+                        data={predictions} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="timestamp" />
                         <YAxis />
                         <Tooltip formatter={(value, name) => {
                             if (name === 'predicted_price' || name === 'actual_price') {
                                 return formatCurrency(value, selectedCoin);
+                            } else if (name === 'difference') {
+                                return `${value > 0 ? '+' : ''}$${Math.abs(value).toFixed(2)}`;
                             } else if (name === 'percentageDifference') {
                                 return `${value.toFixed(2)}%`;
                             }
-                            return value;
-                        }} />
+                        }}
+                                 contentStyle={{ color: 'black', backgroundColor: 'white' }}/>
                         <Legend />
                         <Line type="monotone" dataKey="predicted_price" stroke="#8884d8" activeDot={{ r: 8 }} label="Predicted Price" />
                         <Line type="monotone" dataKey="actual_price" stroke="#82ca9d" activeDot={{ r: 8 }} label="Actual Price" />
                         <Line type="monotone" dataKey="isCorrect" stroke="#FF6347" activeDot={{ r: 8 }} label="Prediction Accuracy" />
+                        <Brush dataKey="timestamp" height={30} stroke="#8884d8" />
                     </LineChart>
-                    <h3 className="chart-title">Volatility and Error Range</h3>
+                    </ResponsiveContainer>
+                    <h2 className="chart-title">Volatility and Error Range</h2>
+                    <p className="chart-description">
+                        This chart displays the absolute differences between predicted and actual prices, providing a visual measure of prediction accuracy over time.
+                    </p>
+                    <ResponsiveContainer width="100%" height={300}>
                     <AreaChart
-                        width={700}
-                        height={300}
-                        data={predictions}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                    >
+                        data={predictions} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="timestamp"
                                type="category"
                                allowDuplicatedCategory={false}
                         />
                         <YAxis />
-                        <Tooltip />
+                        <Tooltip formatter={(value, name) => formatCurrency(value, selectedCoin)} contentStyle={{ color: 'black', backgroundColor: 'white' }}/>
                         <Area type="monotone" dataKey="difference" stroke="#FF6347" fill="#FF6347" fillOpacity={0.3} />
                         <Brush dataKey="timestamp" height={30} stroke="#8884d8" />
                     </AreaChart>
+                    </ResponsiveContainer>
                 </div>
             )}
         </div>

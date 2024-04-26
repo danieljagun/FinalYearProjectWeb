@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import TrendingPredictionsPage from './components/TrendingPredictionsPage';
 import PredictionPage from './components/PredictionPage';
 import PredictionsCharts from './components/PredictionsChart';
+import NewsSentiment from './components/NewsSentiment';
 
 function App() {
     const [coins, setCoins] = useState([]);
@@ -18,6 +19,7 @@ function App() {
     const [showPredictionPage, setShowPredictionPage] = useState(false);
     const [showPredictionCharts, setShowPredictionCharts] = useState(false);
     const [selectedCoin, setSelectedCoin] = useState(null);
+    const [showNewsSentiment, setShowNewsSentiment] = useState(false);
 
     const url =
         'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=en';
@@ -42,6 +44,7 @@ function App() {
         setShowTrendingPredictions(false);
         setShowPredictionPage(false);
         setShowPredictionCharts(false);
+        setShowNewsSentiment(false);
     };
 
     const handleHomeClick = () => {
@@ -49,6 +52,7 @@ function App() {
         setShowTrendingPredictions(false);
         setShowPredictionPage(false);
         setShowPredictionCharts(false);
+        setShowNewsSentiment(false);
     };
 
     const handleTrendingClick = () => {
@@ -56,6 +60,7 @@ function App() {
         setShowTrendingPredictions(true);
         setShowPredictionPage(false);
         setShowPredictionCharts(false);
+        setShowNewsSentiment(false);
     };
 
     const handlePredictionClick = () => {
@@ -63,6 +68,7 @@ function App() {
         setShowTrendingPredictions(false);
         setShowPredictionPage(true);
         setShowPredictionCharts(false);
+        setShowNewsSentiment(false);
     };
 
     const handlePredictionChartsClick = () => {
@@ -70,7 +76,17 @@ function App() {
         setShowTrendingPredictions(false);
         setShowPredictionPage(false);
         setShowPredictionCharts(true);
+        setShowNewsSentiment(false);
     };
+
+    const handleNewsSentimentClick = () => {
+        setShowCoins(false);
+        setShowTrendingPredictions(false);
+        setShowPredictionPage(false);
+        setShowPredictionCharts(false);
+        setShowNewsSentiment(true);
+    };
+
 
     return (
         <>
@@ -80,6 +96,7 @@ function App() {
                 onTrendingClick={handleTrendingClick}
                 onPricePredictionClick={handlePredictionClick}
                 onPredictionsChartClick={handlePredictionChartsClick}
+                onNewsSentimentClick={handleNewsSentimentClick}
             />
             {showCoins ? (
                 <>
@@ -95,11 +112,10 @@ function App() {
                     <PredictionPage />
             ) : showPredictionCharts ? (
                 <PredictionsCharts />
-                ) : (
-                <>
-                    <Hero />
-
-                </>
+            ) : showNewsSentiment ? (
+                <NewsSentiment />
+            ) : (
+                <Hero />
             )}
         </>
     );

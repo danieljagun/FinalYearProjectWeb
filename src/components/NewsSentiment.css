@@ -1,0 +1,41 @@
+.news-sentiment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.coin-select, .analyze-button {
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.analyze-button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.results-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.word-cloud-image {
+    max-width: 100%;
+    height: auto;
+    display: block; /* ensures it is centered */
+}
+
+.wordcloud-description {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
